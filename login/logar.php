@@ -234,9 +234,33 @@ if(mysqli_num_rows($resultado)>0){
             echo "Olá $nomeUsuario, seja bem vindo(a)!";
         ?>
     </h1>
-    <a class="btn btn-lg btn-primary" href="../components/navbar/" role="button">Alterar senha</a>
+    
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+    data-bs-target="#modalMudarSenha">
+      Alterar Senha
+    </button>
   </div>
 </main>
+
+<!-- The Modal -->
+
+<div class="modal" id="modalMudarSenha">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Mude sua senha</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
