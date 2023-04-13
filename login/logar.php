@@ -187,6 +187,36 @@ if (mysqli_connect_errno()){
     exit('Falha ao conectar com o banco ' . mysqli_connect_error());
 };
 
+if(isset($_POST['codigoUsuario'])){
+  
+  //obtem nova senha e codigo do usuario
+  $novaSenha = md5($_POST['fSenha']);
+  $codigoUsuario = $_POST['codigoUsuario'];
+
+  //cria instrução sql para mudar senha conforme condicional do codigo do usuário
+  $sql = "UPDATE usuario SET senha='$novaSenha' WHERE codigo=$codigoUsuario";
+
+  //codindicional. se a instrução for executadocom sucesso, exibe msg
+  if(mysqli_query($conectar, $sql)){
+
+    echo '
+    <div class="alert alert-primary" role="alert">
+      Senha modificada com sucesso! <a href=index.html>Refazer login </a>
+    </div>';
+    exit;
+  }else{
+    echo '
+    <div class="alert alert-danger" role="alert">
+      Erro ao mudar a senha! <a href=indez.html>Refazer login
+    </a></div>';
+    exit();
+    }
+  
+}
+
+
+//};
+
 //verifica se usuário e senha foram setados no form //exclamação é negação
 if (!isset($_POST['fusuario'], $_POST['fsenha'])){
     //exibir erro
@@ -214,6 +244,8 @@ if(mysqli_num_rows($resultado)>0){
     //obtém nome do usuário
     $cadastro = mysqli_fetch_assoc($resultado);
     $nomeUsuario = $cadastro['nome'];
+    $emailUsuario = $cadastro['email'];
+    $codigoUsuario = $cadastro['codigo'];
     //welcome user
     //echo "<br> Olá $nomeUsuario, seja bem vindo(a)!";
 } else{
@@ -246,19 +278,24 @@ if(mysqli_num_rows($resultado)>0){
 
 <div class="modal" id="modalMudarSenha">
   <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Mude sua senha</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+    <form action="logar.php" method="post">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Mude sua senha</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          
+            <input type="password" class="form-control" placeholder="Senha" name="fSenha">
+            <input type="hidden" name="codigoUsuario" value=<?php echo $codigoUsuario;?>>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Salvar</button>
+        </div>
       </div>
-      <div class="modal-body">
-        <p>Modal body text goes here.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary">Salvar</button>
-      </div>
-    </div>
+    <form action="logar.php" method="post">
   </div>
 </div>
 
