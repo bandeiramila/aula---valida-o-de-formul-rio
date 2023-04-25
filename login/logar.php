@@ -207,7 +207,7 @@ if(isset($_POST['codigoUsuario'])){
   }else{
     echo '
     <div class="alert alert-danger" role="alert">
-      Erro ao mudar a senha! <a href=indez.html>Refazer login
+      Erro ao mudar a senha! <a href=index.html>Refazer login
     </a></div>';
     exit();
     }
@@ -288,7 +288,7 @@ if(mysqli_num_rows($resultado)>0){
           
             <input type="password" class="form-control" placeholder="Senha" name="fSenha">
             <input type="hidden" name="codigoUsuario" value=<?php echo $codigoUsuario;?>>
-          </form>
+    </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
